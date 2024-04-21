@@ -11,10 +11,11 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.yourslovakiafrontend.ui.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="" >
         <action
             android:id="@+id/action_loginFragment_to_otherFragment"
             app:destination="@layout/fragment_home" />
