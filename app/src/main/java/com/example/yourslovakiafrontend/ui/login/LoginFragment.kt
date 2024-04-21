@@ -61,13 +61,11 @@ class LoginFragment : Fragment() {
                     override fun onResponse(call: Call, response: Response) {
                         if (response.isSuccessful) {
                             // User created successfully, handle the response as needed
-                            // For example, you can show a success message
                             activity?.runOnUiThread {
                                 Toast.makeText(requireContext(), "User created successfully", Toast.LENGTH_SHORT).show()
                             }
                         } else {
                             // Server returned an error response, handle it accordingly
-                            // For example, you can show an error message
                             activity?.runOnUiThread {
                                 Toast.makeText(requireContext(), "Failed to create user", Toast.LENGTH_SHORT).show()
                             }
