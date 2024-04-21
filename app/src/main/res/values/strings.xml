@@ -1,9 +1,20 @@
 <resources>
-    <string name="app_name">YourSlovakiaFrontend</string>
+    <string name="app_name">YourSlovakia</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_search">Search</string>
     <string name="title_profile">Profile</string>
     <string name="title_login">Login</string>
     <string name="title_notifications">Notifications</string>
+    <string name="search_hint">Search...</string>
+    <string name="search_button">Search</string>
+    <string name="email_login">Email</string>
+    <string name="password_login">Password</string>
+    <string name="confirm_password_login">Confirm Password</string>
+    <string name="email">user@example.com</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_language">Change Language</string>
+    <string name="theme">Change Theme</string>
+    <string name="register">Register</string>
+    <string name="delete_account">Delete Account</string>
 </resources>
