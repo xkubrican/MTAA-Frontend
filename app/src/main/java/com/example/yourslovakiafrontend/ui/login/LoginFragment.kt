@@ -27,18 +27,14 @@ class LoginFragment : Fragment() {
 
         val emailEditText = binding.editTextEmail
         val passwordEditText = binding.editTextPassword
-        val confirmPasswordEditText = binding.editTextConfirmPassword
         val loginButton = binding.buttonLogin
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-            val confirmPassword = confirmPasswordEditText.text.toString()
 
-            if (password == confirmPassword) {
-                // Passwords match, proceed with login
-
-                val url = "https://your-backend-url/createUser" // Replace with your actual backend URL
+            if (password.isNotEmpty()) {
+                val url = "https://your-backend-url/login" // Replace with your actual backend URL
                 val requestBody = FormBody.Builder()
                     .add("email", email)
                     .add("password", password)
@@ -54,27 +50,31 @@ class LoginFragment : Fragment() {
                         e.printStackTrace()
                         // Handle failure, e.g., show error message
                         activity?.runOnUiThread {
-                            Toast.makeText(requireContext(), "Failed to create user", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Failed to login: ${e.message}", Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onResponse(call: Call, response: Response) {
-                        if (response.isSuccessful) {
-                            // User created successfully, handle the response as needed
+                        val responseBody = response.body?.string()
+                        if (response.isSuccessful && responseBody != null) {
+                            // Login successful, handle the response as needed
                             activity?.runOnUiThread {
-                                Toast.makeText(requireContext(), "User created successfully", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), "Login successful: $responseBody", Toast.LENGTH_SHORT).show()
+                                // Redirect to another screen, for example
+                                // (Assuming you have a navigation component)
+                                // findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                             }
                         } else {
-                            // Server returned an error response, handle it accordingly
+                            // Login failed, handle the error response
                             activity?.runOnUiThread {
-                                Toast.makeText(requireContext(), "Failed to create user", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), "Failed to login: ${response.code}", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
                 })
             } else {
-                // Passwords don't match, show an error message
-                Toast.makeText(requireContext(), "Passwords do not match", Toast.LENGTH_SHORT).show()
+                // Password is empty, show an error message
+                Toast.makeText(requireContext(), "Password cannot be empty", Toast.LENGTH_SHORT).show()
             }
         }
         return root

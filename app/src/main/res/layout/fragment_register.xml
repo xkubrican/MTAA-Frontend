@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".ui.login.LoginFragment">
+        tools:context=".ui.login.RegisterFragment">
 
         <ImageView
             android:id="@+id/imageViewLogo"
