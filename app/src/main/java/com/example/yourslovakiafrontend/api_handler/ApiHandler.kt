@@ -8,17 +8,20 @@ import fiit.mtaa.yourslovakia.models.AuthenticationResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 
+
+class ApiHandler{
 val client = OkHttpClient()
-private val baseUrl = "yourslovakia.streicher.tech/"
+private val baseUrl = "https://yourslovakia.streicher.tech/"
 private var jwtToken = ""
 private var refreshToken = ""
+
 fun register(authenticationRequest: AuthenticationRequest) {
     val jsonBody = Gson().toJson(authenticationRequest)
 
     val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
 
     val request = Request.Builder()
-        .url(baseUrl + "create_user")
+        .url(baseUrl + "users/create_user")
         .post(requestBody)
         .build()
 
@@ -45,7 +48,8 @@ fun getToken(authenticationRequest: AuthenticationRequest) {
     val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
 
     val request = Request.Builder()
-        .url("$baseUrl/api/auth")
+        .url(
+            baseUrl +"api/auth")
         .post(requestBody)
         .build()
 
@@ -64,4 +68,5 @@ fun getToken(authenticationRequest: AuthenticationRequest) {
             }
         }
     })
+}
 }

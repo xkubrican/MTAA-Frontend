@@ -1,17 +1,21 @@
 package com.example.yourslovakiafrontend
 
 import org.junit.Test
+import com.example.yourslovakiafrontend.api_handler.ApiHandler
+import fiit.mtaa.yourslovakia.models.AuthenticationRequest
 
-import org.junit.Assert.*
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 class ExampleUnitTest {
+
+    private val apiHandler = ApiHandler()
+    private val authRequest = AuthenticationRequest("andrej@halo.sk", "andrejko123")
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun createUser() {
+        apiHandler.register(authRequest)
+    }
+
+    @Test
+    fun getTokenTest() {
+        apiHandler.getToken(authRequest)
     }
 }

@@ -27,10 +27,6 @@ private var _binding: FragmentSearchBinding? = null
     _binding = FragmentSearchBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
-    val textView: TextView = binding.textDashboard
-    searchViewModel.text.observe(viewLifecycleOwner) {
-      textView.text = it
-    }
     return root
   }
 
