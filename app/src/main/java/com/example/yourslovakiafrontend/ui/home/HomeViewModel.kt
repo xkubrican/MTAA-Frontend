@@ -12,8 +12,8 @@ class HomeViewModel : ViewModel() {
 
     fun loadPointsOfInterest(latitude: Double, longitude: Double) {
         viewModelScope.launch {
-            val types = listOf("castle", "museum", "lake", "reservoir") // Define as needed
-            val pois = ApiHandler.getPointsOfInterest(latitude, longitude, 3000, types)
+            val types = listOf("cave", "zoo", "lake", "reservoir") // Define as needed
+            val pois = ApiHandler.getPointsOfInterest(latitude, longitude, 300000, types)
             pointsOfInterest.postValue(pois ?: listOf())
         }
     }

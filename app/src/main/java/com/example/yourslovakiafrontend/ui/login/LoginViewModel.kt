@@ -16,6 +16,9 @@ class LoginViewModel : ViewModel() {
             val authResponse = ApiHandler.getToken(authRequest)
             withContext(Dispatchers.Main) {
                 onResult(authResponse != null && authResponse.accessToken.isNotEmpty() && authResponse.refreshToken.isNotEmpty())
+                if (authResponse != null) {
+                    ApiHandler.setTokens(authResponse.accessToken, authResponse.refreshToken)
+                }
             }
         }
     }

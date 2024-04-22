@@ -3,7 +3,7 @@ package com.example.yourslovakiafrontend.api_handler
 import com.google.gson.Gson
 import fiit.mtaa.yourslovakia.models.AuthenticationRequest
 import fiit.mtaa.yourslovakia.models.AuthenticationResponse
-import fiit.mtaa.yourslovakia.models.PointOfInterest
+import fiit.mtaa.yourslovakia.models.GenericPointOfInterestModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -71,7 +71,7 @@ object ApiHandler {
         longitude: Double,
         maxDistance: Long,
         monumentTypes: List<String>
-    ): List<PointOfInterest>? = withContext(Dispatchers.IO) {
+    ): List<GenericPointOfInterestModel>? = withContext(Dispatchers.IO) {
         try {
             val urlBuilder = (baseUrl + "points_of_interest").toHttpUrlOrNull()!!.newBuilder()
             urlBuilder.addQueryParameter("latitude", latitude.toString())
@@ -83,6 +83,10 @@ object ApiHandler {
 
             val request = Request.Builder()
                 .url(urlBuilder.build().toString())
+                .addHeader(
+                    "Authorization",
+                    "Bearer $jwtToken"
+                )  // Include the JWT token in the Authorization header
                 .get()
                 .build()
 
@@ -91,7 +95,7 @@ object ApiHandler {
                     response.body?.string()?.let { responseBody ->
                         return@withContext gson.fromJson(
                             responseBody,
-                            Array<PointOfInterest>::class.java
+                            Array<GenericPointOfInterestModel>::class.java
                         ).toList()
                     }
                 }
@@ -101,6 +105,7 @@ object ApiHandler {
         }
         return@withContext null
     }
+
 
     fun setTokens(jwt: String, refresh: String) {
         jwtToken = jwt
