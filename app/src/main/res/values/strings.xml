@@ -24,16 +24,16 @@
     <string name="poi_detail_info">Information about POI</string>
     <string name="poi_favourite">Add to favourites</string>
     <string name="delete_account">Delete Account</string>
-    <string name="access_app_start">Opened application YourSlovakia</string>
-    <string name="access_enter_email">Enter Email</string>
-    <string name="access_enter_password">Enter Password</string>
-    <string name="access_confirm_password">Confirm Password</string>
-    <string name="access_register">Register</string>
-    <string name="access_login">Login</string>
-    <string name="access_edit_profile">Edit Profile</string>
-    <string name="access_change_language">Change Language</string>
-    <string name="access_change_theme">Change Theme</string>
-    <string name="access_delete_account">Delete Account</string>
-    <string name="access_enter_search">Enter Search</string>
-    <string name="access_search_button">Search</string>
+    <string name="access_app_start" translatable="false">Opened application YourSlovakia</string>
+    <string name="access_enter_email" translatable="false">Enter Email</string>
+    <string name="access_enter_password" translatable="false">Enter Password</string>
+    <string name="access_confirm_password" translatable="false">Confirm Password</string>
+    <string name="access_register" translatable="false">Register</string>
+    <string name="access_login" translatable="false">Login</string>
+    <string name="access_edit_profile" translatable="false">Edit Profile</string>
+    <string name="access_change_language" translatable="false">Change Language</string>
+    <string name="access_change_theme" translatable="false">Change Theme</string>
+    <string name="access_delete_account" translatable="false">Delete Account</string>
+    <string name="access_enter_search" translatable="false">Enter Search</string>
+    <string name="access_search_button" translatable="false">Search</string>
 </resources>
