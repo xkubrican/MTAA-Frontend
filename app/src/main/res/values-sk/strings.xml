@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">YourSlovakia</string>
+    <string name="title_home">Home</string>
+    <string name="title_register">Registrovať</string>
+    <string name="title_search">Vyhľadať</string>
+    <string name="title_profile">Profil</string>
+    <string name="title_login">Login</string>
+    <string name="title_notifications">Upozornenia</string>
+    <string name="search_hint">Vyhľadať...</string>
+    <string name="search_button">Vyhľadať</string>
+    <string name="email_login">Email</string>
+    <string name="password_login">Heslo</string>
+    <string name="confirm_password_login">Potvrdiť heslo</string>
+    <string name="email">user@example.com</string>
+    <string name="edit_profile">Upraviť profil</string>
+    <string name="change_language">Zmeniť jazyk</string>
+    <string name="theme">Tmavý režim</string>
+    <string name="register">Registrovať</string>
+    <string name="login">Login</string>
+    <string name="already_registered">Už zaregistrovaný?</string>
+    <string name="poi_name">Meno</string>
+    <string name="poi_distance">Vzdialenosť</string>
+    <string name="poi_info">Viac informácií</string>
+    <string name="poi_detail_info">Informácie o objekte</string>
+    <string name="poi_favourite">Pridať do obľúbených</string>
+    <string name="delete_account">Odstrániť účet</string>
+</resources>

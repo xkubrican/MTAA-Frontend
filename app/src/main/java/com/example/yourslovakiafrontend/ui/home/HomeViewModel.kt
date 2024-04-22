@@ -1,3 +1,5 @@
+package com.example.yourslovakiafrontend.ui.home
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">YourSlovakia</string>
+    <string name="title_home">Startseite</string>
+    <string name="title_register">Registrieren</string>
+    <string name="title_search">Suchen</string>
+    <string name="title_profile">Profil</string>
+    <string name="title_login">Einloggen in</string>
+    <string name="title_notifications">Benachrichtigungen</string>
+    <string name="search_hint">Suchen...</string>
+    <string name="search_button">Suchen</string>
+    <string name="email_login">Email</string>
+    <string name="password_login">Passwort</string>
+    <string name="confirm_password_login">Bestätige das Passwort</string>
+    <string name="email">user@example.com</string>
+    <string name="edit_profile">Profil bearbeiten</string>
+    <string name="change_language">Sprache ändern</string>
+    <string name="theme">Dunkelmodus</string>
+    <string name="register">Registrieren</string>
+    <string name="login">Einloggen in</string>
+    <string name="already_registered">Bereits registriert?</string>
+    <string name="poi_name">Name</string>
+    <string name="poi_distance">Distanz</string>
+    <string name="poi_info">Mehr Informationen</string>
+    <string name="poi_detail_info">Informationen zum Objekt</string>
+    <string name="poi_favourite">Zu Favoriten hinzufügen</string>
+    <string name="delete_account">Konto löschen</string>
+</resources>

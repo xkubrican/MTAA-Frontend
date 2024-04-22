@@ -9,15 +9,17 @@
         android:id="@+id/loginFragment"
         android:name="com.example.yourslovakiafrontend.ui.login.LoginFragment"
         android:label="@string/title_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@+id/navigation_home" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.yourslovakiafrontend.ui.register.RegisterFragment"
-        android:label="@string/title_register" >
+        android:label="@string/title_register">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@+id/loginFragment" />
@@ -29,35 +31,35 @@
         android:name="com.example.yourslovakiafrontend.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
-        <action
-            android:id="@+id/action_homeFragment_to_SearchFragment"
-            app:destination="@+id/navigation_search" />
-        <action
-            android:id="@+id/action_homeFragment_to_ProfileFragment"
-            app:destination="@+id/navigation_profile" />
+    <action
+        android:id="@+id/action_homeFragment_to_SearchFragment"
+        app:destination="@+id/navigation_search" />
+    <action
+        android:id="@+id/action_homeFragment_to_ProfileFragment"
+        app:destination="@+id/navigation_profile" />
 
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.yourslovakiafrontend.ui.search.SearchFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_search" />
-        <action
-            android:id="@+id/action_SearchFragment_to_HomeFragment"
-            app:destination="@+id/navigation_home" />
-        <action
-            android:id="@+id/action_SearchFragment_to_ProfileFragment"
-            app:destination="@+id/navigation_profile" />
+    <action
+        android:id="@+id/action_SearchFragment_to_HomeFragment"
+        app:destination="@+id/navigation_home" />
+    <action
+        android:id="@+id/action_SearchFragment_to_ProfileFragment"
+        app:destination="@+id/navigation_profile" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.yourslovakiafrontend.ui.profile.ProfileFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_profile" />
-        <action
-            android:id="@+id/action_ProfileFragment_to_HomeFragment"
-            app:destination="@+id/navigation_home" />
-        <action
-            android:id="@+id/action_HomeFragment_to_SearchFragment"
-            app:destination="@+id/navigation_search" />
+    <action
+        android:id="@+id/action_ProfileFragment_to_HomeFragment"
+        app:destination="@+id/navigation_home" />
+    <action
+        android:id="@+id/action_HomeFragment_to_SearchFragment"
+        app:destination="@+id/navigation_search" />
 
 </navigation>

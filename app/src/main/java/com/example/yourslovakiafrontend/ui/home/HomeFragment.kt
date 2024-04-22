@@ -1,3 +1,5 @@
+package com.example.yourslovakiafrontend.ui.home
+
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -7,27 +9,34 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yourslovakiafrontend.databinding.FragmentHomeBinding
+import com.example.yourslovakiafrontend.view_adapter.RecyclerViewAdapter
 import com.google.android.gms.location.LocationServices
 
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
+
+        viewModel.pointsOfInterest.observe(viewLifecycleOwner) { points ->
+            binding.recyclerView.adapter = RecyclerViewAdapter(points)
+        }
+
         setupLocation()
     }
 
@@ -35,8 +44,8 @@ class HomeFragment : Fragment() {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
@@ -54,15 +63,17 @@ class HomeFragment : Fragment() {
 
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            location?.let {
-                viewModel.loadPointsOfInterest(it.latitude, it.longitude)
-            } ?: Toast.makeText(context, "Location not available", Toast.LENGTH_SHORT).show()
+            if (location != null) {
+                viewModel.loadPointsOfInterest(location.latitude, location.longitude)
+            } else {
+                Toast.makeText(context, "Location not available", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    init {
-        viewModel.pointsOfInterest.observe(viewLifecycleOwner) { points ->
-            binding.recyclerView.adapter = RecyclerViewAdapter(points)
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
+
