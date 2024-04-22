@@ -12,19 +12,19 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.yourslovakiafrontend.ui.home.HomeFragment"
-        android:label="@string/title_register"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/loginFragment"
+        android:name="com.example.yourslovakiafrontend.ui.login.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login" />
 
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.yourslovakiafrontend.ui.login.LoginFragment"
+        android:id="@+id/registerFragment"
+        android:name="com.example.yourslovakiafrontend.ui.register.RegisterFragment"
         android:label="" >
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@layout/fragment_login" />
+            app:destination="@layout/fragment_register" />
     </fragment>
 
 

@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.yourslovakiafrontend.R
 import com.example.yourslovakiafrontend.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
@@ -34,6 +36,9 @@ class RegisterFragment : Fragment() {
             } else {
                 Toast.makeText(context, "Invalid input!", Toast.LENGTH_SHORT).show()
             }
+        }
+        binding.buttonAlreadyRegistered.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
 
