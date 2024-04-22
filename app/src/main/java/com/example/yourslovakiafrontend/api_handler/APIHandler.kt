@@ -31,10 +31,36 @@ fun register(authenticationRequest: AuthenticationRequest) {
             if (response.isSuccessful) {
                 val responseData = response.body?.string()
                 if (responseData == "true") {
-                    println("Response is true")
+                    getToken(authenticationRequest)
                 }
             } else {
                 println("Unsuccessful response")
+            }
+        }
+    })
+}
+fun getToken(authenticationRequest: AuthenticationRequest) {
+    val jsonBody = Gson().toJson(authenticationRequest)
+
+    val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
+
+    val request = Request.Builder()
+        .url("$baseUrl/api/auth")
+        .post(requestBody)
+        .build()
+
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            response.body?.let {
+                val authenticationResponse: AuthenticationResponse? = Gson().fromJson(it.string(), AuthenticationResponse::class.java)
+                authenticationResponse?.let {
+                    jwtToken=authenticationResponse.accessToken
+                    refreshToken=authenticationResponse.refreshToken
+                }
             }
         }
     })
