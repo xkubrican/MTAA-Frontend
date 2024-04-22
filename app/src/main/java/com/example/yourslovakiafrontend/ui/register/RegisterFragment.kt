@@ -32,7 +32,7 @@ class RegisterFragment : Fragment() {
             if (viewModel.validateRegistration(email, password, confirmPassword)) {
                 viewModel.register(email, password)
             } else {
-                Toast.makeText(context, "Invalid input", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Invalid input!", Toast.LENGTH_SHORT).show()
             }
         }
     }
