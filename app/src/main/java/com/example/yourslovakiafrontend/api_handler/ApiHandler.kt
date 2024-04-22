@@ -1,5 +1,6 @@
 package com.example.yourslovakiafrontend.api_handler
 
+import android.content.Context
 import com.google.gson.Gson
 import fiit.mtaa.yourslovakia.models.AuthenticationRequest
 import fiit.mtaa.yourslovakia.models.AuthenticationResponse
@@ -20,7 +21,7 @@ object ApiHandler {
     private val baseUrl = "https://yourslovakia.streicher.tech/"
     private var jwtToken = ""
     private var refreshToken = ""
-    private lateinit var sseHandler: SSEHandler
+    private var sseHandler: SSEHandler? = null
 
     suspend fun register(authenticationRequest: AuthenticationRequest): Boolean =
         withContext(Dispatchers.IO) {
@@ -107,12 +108,16 @@ object ApiHandler {
         return@withContext null
     }
 
+    fun initializeSseHandler(context: Context) {
+        if (sseHandler == null) {
+            sseHandler = SSEHandler(context.applicationContext)
+            sseHandler!!.startListening()
+        }
+    }
 
     fun setTokens(jwt: String, refresh: String) {
         jwtToken = jwt
         refreshToken = refresh
-        sseHandler = SSEHandler()
-        sseHandler.startListening()
     }
 
 
