@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".ui.login.LoginFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="547dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".ui.login.LoginFragment">
+        tools:context=".ui.login.LoginFragment"
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:id="@+id/imageViewLogo"
@@ -26,8 +26,8 @@
             android:id="@+id/textViewAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
             android:layout_gravity="center_horizontal"
+            android:text="@string/app_name"
             android:textColor="#642FFB"
             android:textSize="20sp"
             android:layout_marginBottom="16dp"/>
@@ -45,22 +45,14 @@
             android:hint="@string/password_login"
             android:inputType="textPassword" />
 
-        <EditText
-            android:id="@+id/editTextConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/confirm_password_login"
-            android:inputType="textPassword" />
-
         <Button
-            android:id="@+id/buttonLogin"
+            android:id="@+id/buttonRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="@string/register" />
+            android:text="@string/login" />
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
