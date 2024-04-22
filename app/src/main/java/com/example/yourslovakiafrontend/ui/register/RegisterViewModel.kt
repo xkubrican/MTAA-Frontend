@@ -1,4 +1,28 @@
 package com.example.yourslovakiafrontend.ui.register
 
-class RegisterViewModel {
+import androidx.lifecycle.ViewModel
+import com.example.yourslovakiafrontend.api_handler.ApiHandler
+import fiit.mtaa.yourslovakia.models.AuthenticationRequest
+
+class RegisterViewModel : ViewModel() {
+
+    private val apiHandler = ApiHandler()
+
+    fun validateRegistration(email: String, password: String, confirmPassword: String): Boolean {
+        if (!email.contains("@")) {
+            return false
+        }
+        if (password != confirmPassword) {
+            return false
+        }
+        if (password.length < 8) {
+            return false
+        }
+        return true
+    }
+
+    fun register(email: String, password: String) {
+        val authRequest = AuthenticationRequest(email, password)
+        apiHandler.register(authRequest)
+    }
 }
