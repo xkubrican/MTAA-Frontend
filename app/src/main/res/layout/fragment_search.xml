@@ -20,7 +20,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buttonSearch"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="6dp"/>
+        android:layout_marginBottom="6dp"
+        android:contentDescription="@string/access_enter_search"
+        />
 
     <!-- Search button -->
     <Button
@@ -30,7 +32,9 @@
         android:text="@string/search_button"
         app:layout_constraintTop_toTopOf="@id/editTextSearch"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/access_search_button"
+        />
 
     <!-- RecyclerView to display search results -->
     <androidx.recyclerview.widget.RecyclerView
