@@ -32,13 +32,30 @@ class RegisterFragment : Fragment() {
             val password = binding.editTextPassword.text.toString()
             val confirmPassword = binding.editTextConfirmPassword.text.toString()
             if (viewModel.validateRegistration(email, password, confirmPassword)) {
-                viewModel.register(email, password)
+                attemptRegistration(email, password)
             } else {
                 Toast.makeText(context, "Invalid input!", Toast.LENGTH_SHORT).show()
             }
         }
         binding.buttonAlreadyRegistered.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+    }
+
+    private fun attemptRegistration(email: String, password: String) {
+        viewModel.register(email, password) { isSuccess ->
+            if (isSuccess) {
+                // Handle successful registration
+                Toast.makeText(context, "Registration successful!", Toast.LENGTH_SHORT).show()
+                // You might want to navigate to another screen or update the UI accordingly
+            } else {
+                // Handle failed registration
+                Toast.makeText(
+                    context,
+                    "Registration failed. Please try again.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

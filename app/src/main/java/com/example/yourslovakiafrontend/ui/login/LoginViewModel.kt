@@ -1,14 +1,23 @@
-package com.example.yourslovakiafrontend.ui.login;
+package com.example.yourslovakiafrontend.ui.login
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.yourslovakiafrontend.api_handler.ApiHandler
+import fiit.mtaa.yourslovakia.models.AuthenticationRequest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is login Fragment"
+    fun login(email: String, password: String, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val authRequest = AuthenticationRequest(email, password)
+            val authResponse = ApiHandler.getToken(authRequest)
+            withContext(Dispatchers.Main) {
+                onResult(authResponse != null && authResponse.accessToken.isNotEmpty() && authResponse.refreshToken.isNotEmpty())
+            }
+        }
     }
-    val text: LiveData<String> = _text
 
 }

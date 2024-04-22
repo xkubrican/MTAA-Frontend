@@ -3,79 +3,109 @@ package com.example.yourslovakiafrontend.api_handler
 import com.google.gson.Gson
 import fiit.mtaa.yourslovakia.models.AuthenticationRequest
 import fiit.mtaa.yourslovakia.models.AuthenticationResponse
-import okhttp3.Call
-import okhttp3.Callback
+import fiit.mtaa.yourslovakia.models.PointOfInterest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Response
 import java.io.IOException
 
 
 object ApiHandler {
     val client = OkHttpClient()
+    private val gson = Gson()
     private val baseUrl = "https://yourslovakia.streicher.tech/"
     private var jwtToken = ""
     private var refreshToken = ""
 
-    fun register(authenticationRequest: AuthenticationRequest) {
-        val jsonBody = Gson().toJson(authenticationRequest)
+    suspend fun register(authenticationRequest: AuthenticationRequest): Boolean =
+        withContext(Dispatchers.IO) {
+            try {
+                val jsonBody = gson.toJson(authenticationRequest)
+                val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
+                val request = Request.Builder()
+                    .url(baseUrl + "users/create_user")
+                    .post(requestBody)
+                    .build()
 
-        val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
+                client.newCall(request).execute().use { response ->
+                    return@withContext response.isSuccessful
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                return@withContext false
+            }
+        }
 
-        val request = Request.Builder()
-            .url(baseUrl + "users/create_user")
-            .post(requestBody)
-            .build()
+    suspend fun getToken(authenticationRequest: AuthenticationRequest): AuthenticationResponse? =
+        withContext(Dispatchers.IO) {
+            try {
+                val jsonBody = gson.toJson(authenticationRequest)
+                val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
+                val request = Request.Builder()
+                    .url(baseUrl + "api/auth")
+                    .post(requestBody)
+                    .build()
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
+                client.newCall(request).execute().use { response ->
+                    if (response.isSuccessful) {
+                        response.body?.string()?.let { responseBody ->
+                            return@withContext gson.fromJson(
+                                responseBody,
+                                AuthenticationResponse::class.java
+                            )
+                        }
+                    }
+                }
+            } catch (e: IOException) {
                 e.printStackTrace()
             }
+            return@withContext null
+        }
 
-            override fun onResponse(call: Call, response: Response) {
+    suspend fun getPointsOfInterest(
+        latitude: Double,
+        longitude: Double,
+        maxDistance: Long,
+        monumentTypes: List<String>
+    ): List<PointOfInterest>? = withContext(Dispatchers.IO) {
+        try {
+            val urlBuilder = (baseUrl + "points_of_interest").toHttpUrlOrNull()!!.newBuilder()
+            urlBuilder.addQueryParameter("latitude", latitude.toString())
+            urlBuilder.addQueryParameter("longitude", longitude.toString())
+            urlBuilder.addQueryParameter("maxDistance", maxDistance.toString())
+            monumentTypes.forEach { type ->
+                urlBuilder.addQueryParameter("monumentTypes", type)
+            }
+
+            val request = Request.Builder()
+                .url(urlBuilder.build().toString())
+                .get()
+                .build()
+
+            client.newCall(request).execute().use { response ->
                 if (response.isSuccessful) {
-                    val responseData = response.body?.string()
-                    if (responseData == "true") {
-                        println("Good response")
-                    }
-                } else {
-                    println("Unsuccessful response")
-                }
-            }
-        })
-    }
-
-    fun getToken(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
-        val jsonBody = Gson().toJson(authenticationRequest)
-
-        val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
-
-        val request = Request.Builder()
-            .url(
-                baseUrl + "api/auth"
-            )
-            .post(requestBody)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                response.body?.let {
-                    val authenticationResponse: AuthenticationResponse? =
-                        Gson().fromJson(it.string(), AuthenticationResponse::class.java)
-                    authenticationResponse?.let {
-                        jwtToken = authenticationResponse.accessToken
-                        refreshToken = authenticationResponse.refreshToken
+                    response.body?.string()?.let { responseBody ->
+                        return@withContext gson.fromJson(
+                            responseBody,
+                            Array<PointOfInterest>::class.java
+                        ).toList()
                     }
                 }
             }
-        })
-        return AuthenticationResponse(jwtToken, refreshToken)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return@withContext null
     }
+
+    fun setTokens(jwt: String, refresh: String) {
+        jwtToken = jwt
+        refreshToken = refresh
+    }
+
 
 }
