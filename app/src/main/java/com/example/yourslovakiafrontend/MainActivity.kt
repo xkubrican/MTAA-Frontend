@@ -18,9 +18,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.loginFragment) {
+            if (destination.id == R.id.registerFragment || destination.id == R.id.loginFragment) {
                 binding.navView.visibility = View.GONE
-            } else {
+            }
+            else {
                 binding.navView.visibility = View.VISIBLE
             }
         }
