@@ -112,6 +112,7 @@ object ApiHandler {
         jwtToken = jwt
         refreshToken = refresh
         sseHandler = SSEHandler()
+        sseHandler.startListening()
     }
 
 
