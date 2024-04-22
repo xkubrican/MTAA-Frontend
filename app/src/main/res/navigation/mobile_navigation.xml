@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.yourslovakiafrontend.ui.search.SearchFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
     <action
         android:id="@+id/action_SearchFragment_to_HomeFragment"
@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.yourslovakiafrontend.ui.profile.ProfileFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
     <action
         android:id="@+id/action_ProfileFragment_to_HomeFragment"
