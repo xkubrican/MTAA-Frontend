@@ -47,7 +47,7 @@ class RegisterFragment : Fragment() {
             if (isSuccess) {
                 // Handle successful registration
                 Toast.makeText(context, "Registration successful!", Toast.LENGTH_SHORT).show()
-                // You might want to navigate to another screen or update the UI accordingly
+                findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
             } else {
                 // Handle failed registration
                 Toast.makeText(
