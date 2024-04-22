@@ -20,6 +20,7 @@ object ApiHandler {
     private val baseUrl = "https://yourslovakia.streicher.tech/"
     private var jwtToken = ""
     private var refreshToken = ""
+    private lateinit var sseHandler: SSEHandler
 
     suspend fun register(authenticationRequest: AuthenticationRequest): Boolean =
         withContext(Dispatchers.IO) {
@@ -110,6 +111,7 @@ object ApiHandler {
     fun setTokens(jwt: String, refresh: String) {
         jwtToken = jwt
         refreshToken = refresh
+        sseHandler = SSEHandler()
     }
 
 
