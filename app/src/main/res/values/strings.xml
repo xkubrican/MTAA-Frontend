@@ -16,5 +16,10 @@
     <string name="change_language">Change Language</string>
     <string name="theme">Change Theme</string>
     <string name="register">Register</string>
+    <string name="poi_name">POI Name</string>
+    <string name="poi_distance">POI Distance</string>
+    <string name="poi_info">More Information</string>
+    <string name="poi_detail_info">Information about POI</string>
+    <string name="poi_favourite">Add to favourites</string>
     <string name="delete_account">Delete Account</string>
 </resources>
