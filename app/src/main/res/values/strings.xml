@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">YourSlovakia</string>
     <string name="title_home">Home</string>
+    <string name="title_register">Register</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_search">Search</string>
     <string name="title_profile">Profile</string>
@@ -17,6 +18,7 @@
     <string name="theme">Change Theme</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="already_registered">Already Registered?</string>
     <string name="poi_name">POI Name</string>
     <string name="poi_distance">POI Distance</string>
     <string name="poi_info">More Information</string>
